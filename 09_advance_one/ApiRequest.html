@@ -13,13 +13,22 @@
     4	DONE	The operation is complete.
 </body>
 <script>
+    
+    // xml http request
+
     const requestUrl = 'https://api.github.com/users/iamnikhilranjan'
     const xhr = new XMLHttpRequest();
     xhr.open('GET', requestUrl)      
     xhr.onreadystatechange = function(){ //to track the request.
         console.log(xhr.readyState);
         if(xhr.readyState === 4){
-              console.log(this.responseText);
+            //   const data = this.responseText //this is used for current context.
+            //   console.log(data); //string
+            //   console.log(data.followers); // undefined -- bcz reponse is in string (most of the time)
+
+            const data = JSON.parse(this.responseText) //convert string to JSON
+            console.log(typeof data); //object
+            console.log(data.followers);
         }
     }
     xhr.send();
